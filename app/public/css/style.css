@@ -1,0 +1,8 @@
+#modalImage {
+    height: 400px;
+    width: 400px;
+}
+
+.unAnswered {
+    border: red 1px solid;
+}

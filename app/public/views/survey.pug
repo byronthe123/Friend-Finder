@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    form(method='POST' action='/survey')
+        .form-group.name
+            label(for='name') Name (Required)
+            input#name.form-control(type='text', placeholder='Name')
+        .form-group.photoUrl
+            label(for='photoUrl') Link to Photo Image (Required)
+            input#photoUrl.form-control(type='text', placeholder='http://photo-url.com')
+        //- h1=surveyQs
+        .questions
+            each val, i in surveyQs
+                .form-group
+                    label(for='exampleFormControlSelect1') #{val}
+                    select(id='q'+i name='q'+i).form-control
+                        option(value=0, selected='', disabled='') Please select
+                        option(value=1) 1 (Strongly Disagree)
+                        option(value=2) 2
+                        option(value=3) 3
+                        option(value=4) 4
+                        option(value=5) 5 (Strongly Agree)
+            // Button trigger modal
+            //- button.btn.btn-primary(type='button', id='btn_submit', data-toggle='modal', data-target='#exampleModal')
+            button.btn.btn-primary(type='button', id='btn_submit', data-target='#exampleModal')
+                | Get Results
+            // Modal
+            #modalResult.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            h5#ModalLabel.modal-title Best Match
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        .modal-body
+                            h3#outModalName
+                            img#modalImage(src='https://cdn.vox-cdn.com/thumbor/8mZ6JQiSG2R1xXAwwxhhMllgFyY=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/61691469/mswindows1_2040.0.0.jpg')
+                        .modal-footer
+                            button.btn.btn-secondary#btn_closeModal(type='button', data-dismiss='modal') Close
+
